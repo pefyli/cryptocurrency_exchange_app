@@ -34,6 +34,10 @@ npm run start
 npm run test
 ```
 
+## Package, Auto Tests and Deployment
+- [GitActions](https://github.com/features/actions)
+
+
 ## API Endpoints
 
 |Endpoint          | What it does                                 | Request type |
