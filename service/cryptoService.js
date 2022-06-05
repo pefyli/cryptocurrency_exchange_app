@@ -1,16 +1,17 @@
 const axios = require('axios');
+var base64 = require('base-64');
 
 const getLatestCryptoCurrencyList = async() => {
     let res = [];
     await axios.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest', {
         headers: {
-            'X-CMC_PRO_API_KEY': process.env.API_KEY,
+            'X-CMC_PRO_API_KEY': base64.decode(process.env.API_KEY),
         },
     }).then(resp => {
         res = filterCrptoMoving(resp.data.data);
     }).catch(err => {
         // Handle Error Here
-        console.error(err);
+        return err;
     });
     return res;
 }
@@ -29,13 +30,13 @@ const getPriceConversion = async(convertFromId, convertToId, amount) => {
     let res = [];
     await axios.get('https://pro-api.coinmarketcap.com/v2/tools/price-conversion?convert_id='+convertToId+'&id='+convertFromId+'&amount='+amount, {
         headers: {
-            'X-CMC_PRO_API_KEY': process.env.API_KEY,
+            'X-CMC_PRO_API_KEY': base64.decode(process.env.API_KEY),
         },
     }).then(resp => {
         res = resp.data.data;
     }).catch(err => {
         // Handle Error Here
-        console.error(err);
+        return err;
     });
     return res;
 }
@@ -44,13 +45,13 @@ const getSupportedFiatCurrency = async() => {
     let res = [];
     await axios.get('https://pro-api.coinmarketcap.com/v1/fiat/map', {
         headers: {
-            'X-CMC_PRO_API_KEY': process.env.API_KEY,
+            'X-CMC_PRO_API_KEY': base64.decode(process.env.API_KEY),
         },
     }).then(resp => {
         res = resp.data.data;
     }).catch(err => {
         // Handle Error Here
-        console.error(err);
+        return err;
     });
     return res;
 }
@@ -73,3 +74,4 @@ module.exports = {
     getSupportedFiatCurrency,
     checkIsSupportedCurrency
 };
+
