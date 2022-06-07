@@ -35,10 +35,11 @@ npm start
 npm test
 ```
 
-## Package and Auto Tests
+## Package, Auto Tests and Deployment
 - [GitActions](https://github.com/features/actions)
 - [Docker](https://www.docker.com/)
 - [Npm](https://www.npmjs.com/)
+- [Heroku](https://dashboard.heroku.com/apps)
 
 
 ## API Endpoints
@@ -47,4 +48,8 @@ npm test
 |------------------|----------------------------------------------|--------------|
 |/crypto   |Return top movings cryptocurrency over last 24 hours. | GET|
 |/crypto?convertFromId={convertFromId}&convertToId={convertToId}&amount={amount}|Return top movings cryptocurrency over last 24 hours and convert price to specific fiat currency, if receive parameter, will append a conversion result to original object. | GET|
+
+## Live instance
+Service is available on https://cryptocurrency-exchange-app.herokuapp.com/crypto
+
 
