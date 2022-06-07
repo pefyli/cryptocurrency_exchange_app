@@ -36,6 +36,7 @@ npm run test
 
 ## Package, Auto Tests and Deployment
 - [GitActions](https://github.com/features/actions)
+- [Docker](https://www.docker.com/)
 
 
 ## API Endpoints
