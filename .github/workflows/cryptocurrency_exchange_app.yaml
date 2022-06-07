@@ -5,9 +5,9 @@ name: cryptocurrency_exchange_app CI
 
 on:
   push:
-    branches: [ "develop", "master"]
+    branches: [ "develop", "main"]
   pull_request:
-    branches: [ "develop", "master"]
+    branches: [ "develop", "main"]
 
 jobs:
   build:
