@@ -19,7 +19,7 @@ Cryptocurrency_exchange_app uses a number of open source projects to work proper
 
 ## Installation
 
-Install and build the dependencies, default service will run on port 3000.
+Install and build the dependencies, service will run on port 3000 in default.
 ```sh
 npm install
 ```
