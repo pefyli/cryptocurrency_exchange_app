@@ -1,5 +1,7 @@
 const axios = require('axios');
 var base64 = require('base-64');
+const CryptoCurrency = require('../model/cryptoCurrencyModel');
+const Conversion = require('../model/conversionModel');
 
 const getLatestCryptoCurrencyList = async() => {
     let res = [];
@@ -8,7 +10,21 @@ const getLatestCryptoCurrencyList = async() => {
             'X-CMC_PRO_API_KEY': base64.decode(process.env.API_KEY),
         },
     }).then(resp => {
-        res = filterCrptoMoving(resp.data.data);
+        let topMovings = filterCrptoMoving(resp.data.data);
+        //set up model
+        topMovings.forEach(topMoving => {
+            let cryptoCurrencyModel = new CryptoCurrency({
+                circulating_supply: topMoving.circulating_supply,
+                cmc_rank: topMoving.cmc_rank,
+                date_added: topMoving.date_added,
+                id: topMoving.id,
+                last_updated: topMoving.last_updated,
+                max_supply: topMoving.max_supply,
+                name: topMoving.name,
+                quote: topMoving.quote
+            });
+            res.push(cryptoCurrencyModel);
+        });
     }).catch(err => {
         // Handle Error Here
         return err;
@@ -27,18 +43,26 @@ const filterCrptoMoving = (cryptos) =>{
 }
 
 const getPriceConversion = async(convertFromId, convertToId, amount) => {
-    let res = [];
+    let conversionModel;
     await axios.get('https://pro-api.coinmarketcap.com/v2/tools/price-conversion?convert_id='+convertToId+'&id='+convertFromId+'&amount='+amount, {
         headers: {
             'X-CMC_PRO_API_KEY': base64.decode(process.env.API_KEY),
         },
     }).then(resp => {
-        res = resp.data.data;
+        let quoteConversion = resp.data.data;
+        conversionModel = new Conversion({
+            amount: quoteConversion.amount,
+            id: quoteConversion.id,
+            last_updated: quoteConversion.last_updated,
+            name: quoteConversion.name,
+            quote: quoteConversion.quote,
+            symbol: quoteConversion.symbol,
+        });
     }).catch(err => {
         // Handle Error Here
         return err;
     });
-    return res;
+    return conversionModel;
 }
 
 const getSupportedFiatCurrency = async() => {
