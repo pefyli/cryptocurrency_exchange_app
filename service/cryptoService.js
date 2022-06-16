@@ -35,7 +35,7 @@ const getLatestCryptoCurrencyList = async() => {
 const filterCrptoMoving = (cryptos) =>{
     let topMoving = [];
     Object.keys(cryptos).forEach((element)=>{
-        if ((cryptos[element].quote.USD.percent_change_24h > 0.5)||(cryptos[element].quote.USD.percent_change_24h < -0.5)) {
+        if ((cryptos[element].quote.USD.percent_change_24h > 5)||(cryptos[element].quote.USD.percent_change_24h < -5)) {
             topMoving.push(cryptos[element]);
         }
     }, {})
